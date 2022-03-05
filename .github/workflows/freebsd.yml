@@ -29,7 +29,7 @@ jobs:
           env
           freebsd-version
           export VERSION=`grep '<Version>' < nuget/StubSystemSQLiteCoreNetStandard.freebsd.csproj | sed 's/.*<Version>\(.*\)<\/Version>.*/\1/'`
-          export VERSION=${VERSION//$'\r\n'}
+          
           curl -L https://system.data.sqlite.org/downloads/${VERSION}/sqlite-netFx-full-source-${VERSION}.zip -o sqlite.zip
 
           mkdir source
