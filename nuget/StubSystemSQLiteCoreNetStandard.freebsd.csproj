@@ -17,7 +17,7 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<Content Include="..\bin\2013\Release\bin\SQLite.Interop.dll">
+		<Content Include="..\source\bin\2013\Release\bin\SQLite.Interop.dll">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 			<IncludeInPackage>true</IncludeInPackage>
 			<Pack>true</Pack>
