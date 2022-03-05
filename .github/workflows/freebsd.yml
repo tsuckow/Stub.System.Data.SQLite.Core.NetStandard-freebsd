@@ -1,0 +1,58 @@
+name: FreeBSD
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: macos-10.15
+    name: Build
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.101
+    - name: Build native FreeBSD lib
+      id: test
+      uses: vmactions/freebsd-vm@v0.1.5
+      with:
+        usesh: true
+        sync: sshfs
+        prepare: pkg install -y curl libinotify git cmake ninja bash unzip
+        run: |
+          #!/bin/bash
+          set -x
+          set -e
+          pwd
+          ls -lah
+          whoami
+          env
+          freebsd-version
+          export VERSION=`grep '<Version>' < nuget/StubSystemSQLiteCoreNetStandard.freebsd.csproj | sed 's/.*<Version>\(.*\)<\/Version>.*/\1/'`
+          export VERSION=${VERSION//$'\r\n'}
+          curl -L https://system.data.sqlite.org/downloads/${VERSION}/sqlite-netFx-full-source-${VERSION}.zip -o sqlite.zip
+
+          mkdir source
+          cd source
+          unzip ../sqlite.zip
+          cd Setup
+          bash ./compile-interop-assembly-release.sh
+          cd ../bin/2013/Release/bin/
+          cp libSQLite.Interop.so SQLite.Interop.dll
+          
+    - name: Save Artifacts x64
+      uses: actions/upload-artifact@v2
+      with:
+        name: libSQLite.Interop.so-x64
+        path: source/bin/2013/Release/bin/libSQLite.Interop.so
+        if-no-files-found: error
+    - name: Restore dependencies
+      run: dotnet restore StubSystemSQLiteCoreNetStandard.freebsd.sln
+    - name: Build
+      run: dotnet build --configuration Release --no-restore StubSystemSQLiteCoreNetStandard.freebsd.sln
+    - name: Save Artifacts nuget
+      uses: actions/upload-artifact@v2
+      with:
+        name: nuget
+        path: nuget/bin/Release/Stub.System.SQLite.Core.NetStandard.freebsd.*.nupkg
+        if-no-files-found: error

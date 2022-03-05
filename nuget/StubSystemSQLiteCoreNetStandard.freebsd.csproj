@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Stub.System.SQLite.Core.NetStandard.freebsd</RootNamespace>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	  <Version>1.0.115.5</Version>
+	  <Description>
+		 Provides the freebsd native libraries for Mono.Posix.NETStandard
+	  </Description>
+	  <PackageTags>native</PackageTags>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <PackageProjectUrl>https://github.com/tsuckow/Stub.System.Data.SQLite.Core.NetStandard-freebsd</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="${Version}" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Content Include="..\bin\2013\Release\bin\SQLite.Interop.dll">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<IncludeInPackage>true</IncludeInPackage>
+			<Pack>true</Pack>
+			<PackagePath>runtimes\freebsd-x64\native</PackagePath>
+		</Content>
+	</ItemGroup>
+</Project>
