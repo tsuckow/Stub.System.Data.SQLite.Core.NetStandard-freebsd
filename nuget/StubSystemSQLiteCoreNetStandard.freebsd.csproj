@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="${Version}" />
+    <PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.115.5" />
   </ItemGroup>
 
 	<ItemGroup>
