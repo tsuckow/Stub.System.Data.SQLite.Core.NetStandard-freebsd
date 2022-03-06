@@ -39,13 +39,12 @@ jobs:
           bash ./compile-interop-assembly-release.sh
           cd ../bin/2013/Release/bin/
           ls -lah
-          cp libSQLite.Interop.so SQLite.Interop.dll
           
     - name: Save Artifacts x64
       uses: actions/upload-artifact@v2
       with:
         name: libSQLite.Interop.so-x64
-        path: source/bin/2013/Release/bin/libSQLite.Interop.so
+        path: source/bin/2013/Release/bin/*
         if-no-files-found: error
     - name: Restore dependencies
       run: dotnet restore StubSystemSQLiteCoreNetStandard.freebsd.sln
