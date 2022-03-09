@@ -3,7 +3,7 @@
   <PropertyGroup>
     <RootNamespace>Stub.System.SQLite.Core.NetStandard.freebsd</RootNamespace>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.114.3</Version>
+    <Version>1.0.114.0</Version>
     <Description>
 	 Provides the freebsd native libraries for Mono.Posix.NETStandard
     </Description>
@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.114.3" />
+    <PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.114.0" />
   </ItemGroup>
 
 	<ItemGroup>
